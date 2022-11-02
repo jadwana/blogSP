@@ -13,9 +13,9 @@ foreach ($posts as $post){
          <?= htmlspecialchars($post->title); ?>
          <em>le <?= $post->french_creation_date; ?></em>
       </h3>
+      <p><?= $post->chapo;?></p>
       <p>
-         <?= nl2br(htmlspecialchars( $post->content));
-         ?>
+         <?= nl2br(htmlspecialchars( $post->content));?>
          <br />
          <em><a href="index.php?action=post&id=<?= urlencode($post->identifier) ?>">Commentaires</a></em>
       </p>

@@ -4,8 +4,8 @@
         <input type="text" name="pseudo" id="pseudo">   
     </div>
     <div>
-        <label for="password">Votre mot de passe</label>
-        <input type="password" name="password" id="password">
+        <label for="comment">Votre commentaire</label>
+        <input type="text" name="comment" id="comment">
     </div>
 
 </form>
