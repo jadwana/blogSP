@@ -9,9 +9,11 @@ require_once('src/lib/database.php');
 
 class Comment
 {
-    public string $author;
+    public string $pseudo;
     public string $frenchCreationDate;
     public string $comment;
+    public string $identifier;
+    public string $post;
 }
 
 class CommentRepository
@@ -23,15 +25,15 @@ class CommentRepository
     {
     
         $statement= $this->connection->getConnection()->prepare(
-            "SELECT comment_id, author, comment, DATE_FORMAT(commentDate, '%d%m%Y à %Hh%imin%ss') AS 
-        french_creation_date, post_id FROM comments WHERE post_id = ? ORDER BY commentDate DESC");
+            "SELECT comments.comment_id, comments.comment, DATE_FORMAT(comments.commentDate, '%d%m%Y à %Hh%imin%ss') AS 
+        french_creation_date, comments.post_id, users.pseudo FROM comments INNER JOIN users ON comments.user_id = users.user_id WHERE post_id = ? AND comments.validation = 'y' ORDER BY comments.commentDate DESC");
 
         $statement->execute([$post]);
 
         $comments = [];
         while (($row = $statement->fetch())){
             $comment = new Comment();
-            $comment->author = $row['author'];
+            $comment->pseudo = $row['pseudo'];
             $comment->frenchCreationDate = $row['french_creation_date'];
             $comment->comment = $row['comment'];
             $comment->identifier = $row['comment_id'];
@@ -42,11 +44,13 @@ class CommentRepository
     
     return $comments;
     } 
-
+    // on récupère un seul commentaire en fonction de son id
     public function getComment(string $identifier): ?Comment
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT comment_id, author, comment, DATE_FORMAT(commentDate, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date, post_id FROM comments WHERE id = ?"
+            "SELECT comments.comment_id, comments.comment, DATE_FORMAT(comments.commentDate, '%d%m%Y à %Hh%imin%ss') AS 
+            french_creation_date, comments.post_id, users.pseudo FROM comments INNER JOIN users ON comments.user_id = users.user_id
+             WHERE comments.comment_id = ?"
         );
         $statement->execute([$identifier]);
 
@@ -57,7 +61,7 @@ class CommentRepository
 
         $comment = new Comment();
         $comment->identifier = $row['comment_id'];
-        $comment->author = $row['author'];
+        $comment->author = $row['pseudo'];
         $comment->frenchCreationDate = $row['french_creation_date'];
         $comment->comment = $row['comment'];
         $comment->post = $row['post_id'];
@@ -65,25 +69,25 @@ class CommentRepository
         return $comment;
     }
 
-    //fonction creation commentaire
+    //creation commentaire
 
-    public function createComment(string $post, string $author, string $comment): bool
+    public function createComment(string $post, string $user_id, string $comment): bool
     {
         $statement = $this->connection->getConnection()->prepare(
-            'INSERT INTO comments(post_id, author, comment, commentDate) VALUES(?, ?, ?, NOW())'
+            'INSERT INTO comments(post_id, user_id, comment, commentDate) VALUES(?, ?, ?, NOW())'
         );
-        $affectedLines = $statement->execute([$post, $author, $comment]);
+        $affectedLines = $statement->execute([$post, $user_id, $comment]);
 
         return($affectedLines > 0);
     }
 
-    //fonction modifier un commentaire
-    public function updateComment(string $identifier, string $author, string $comment): bool
+    //modifier un commentaire
+    public function updateComment(string $identifier, string $comment): bool
     {
         $statement = $this->connection->getConnection()->prepare(
-            'UPDATE comments SET author=?, comment=?  WHERE comment_id=?'
+            'UPDATE comments SET  comment=?  WHERE comment_id=?'
         );
-        $affectedLines = $statement->execute([$author, $comment, $identifier]);
+        $affectedLines = $statement->execute([$comment, $identifier]);
 
         return($affectedLines > 0);
     }

@@ -9,7 +9,9 @@
     <title><?= $title?></title>
 </head>
 <body>
-    <nav>la navbar</nav>
-    <?= $content?>
+   <div class="container">
+   <?= $content?>
+   </div>
+    
 </body>
 </html>

@@ -1,13 +1,20 @@
 <?php
-use App\Controllers\AddComment\AddComment;
-use App\Controllers\PostList\PostList;
 use App\Controllers\OnePost\OnePost;
+use App\Controllers\Homepage\Homepage;
+use App\Controllers\PostList\PostList;
+use App\Controllers\AddComment\AddComment;
 use App\controllers\UpdateComment\UpdateComment;
+use App\Controllers\Logon\Logon;
+use App\Controllers\Connexion\Connexion;
+
 // require 'vendor/autoload.php';
    require_once('src/Controllers/PostList.php');
    require_once('src/Controllers/OnePost.php');
    require_once('src/Controllers/AddComment.php');
    require_once('src/Controllers/UpdateComment.php');
+   require_once('src/Controllers/Homepage.php');
+   require_once('src/Controllers/Logon.php');
+   require_once('src/Controllers/connexion.php');
 
    //ce fichier est notre routeur
    //il va donc nous rediriger vers le bon controleur
@@ -46,13 +53,24 @@ use App\controllers\UpdateComment\UpdateComment;
                throw new Exception('aucun identifiant envoyé') ;
             }
 
-         } else{
+         }elseif($_GET['action'] === 'postlist'){
+            (new PostList())->execute();
+
+         }elseif($_GET['action'] === 'logon'){
+            (new Logon())->execute();
+
+         }elseif($_GET['action'] === 'connexion'){
+            (new Connexion())->execute();
+         }else{
 
             throw new Exception("la page que vous cherchez n'existe pas.");
+
          }
+         
+         
         
       }else{
-         (new PostList())->execute();
+         (new Homepage())->execute();
       }
    
    }catch (Exception $e) {

@@ -1,15 +1,22 @@
 <form action="#">
     <div>
-        <label for="pseudo">Votre pseudo</label>
-        <input type="text" name="pseudo" id="pseudo">   
+        <label for="title">Titre :</label>
+        <input type="text" name="title" id="title">   
     </div>
     <div>
-        <label for="email">Votre email</label>
-        <input type="email" name="email" id="email">
+        <label for="chapo">chapo :</label>
+        <input type="text" name="chapo" id="chapo">   
     </div>
     <div>
-        <label for="password">Votre mot de passe</label>
-        <input type="password" name="password" id="password">
+        <label for="content">contenu</label>
+        <textarea name="content" id="" cols="30" rows="10"></textarea>
+    </div>
+    <div>
+        <label for="author">auteur :</label>
+        <input type="text" name="author" id="author">   
+    </div>
+    <div>
+        <input type="submit" value="ajouter">
     </div>
 
 </form>

@@ -18,16 +18,16 @@ class UpdateComment
             $author =null;
             $comment = null;
 
-            if(!empty($input['author']) && !empty($input['comment'])){
-                $author = $input['author'];
-                $comment = $input['comment'];
+            if(!empty($input['pseudo']) && !empty($input['comment'])){
+                $author = htmlspecialchars($input['pseudo']);
+                $comment = htmlspecialchars($input['comment']) ;
             }else {
                 throw new \Exception('les données du formulaire sont invalides');
             }
 
             $commentRepository = new CommentRepository();
             $commentRepository->connection = new DatabaseConnection();
-            $success = $commentRepository->updateComment($identifier, $author, $comment);
+            $success = $commentRepository->updateComment($identifier, $comment);
             if(!$success){
                 throw new \Exception('Impossible de modifier le commentaire !');
             }else{
@@ -48,7 +48,7 @@ class UpdateComment
             throw new \Exception("Le commentaire $identifier n'existe pas.");
         }    
     
-        require('Views/form/updateCommentForm.php');
+        require('Views/forms/updateCommentForm.php');
     
    
     }

@@ -4,6 +4,7 @@
 
 <h1>Mon super super blog !</h1>
 <p>Derniers billets du blog :</p>
+<p><a href="index.php">retour accueil</a></p>
 
 <?php
 foreach ($posts as $post){
@@ -13,16 +14,15 @@ foreach ($posts as $post){
          <?= htmlspecialchars($post->title); ?>
          <em>le <?= $post->french_creation_date; ?></em>
       </h3>
-      <p><?= $post->chapo;?></p>
-      <p>
-         <?= nl2br(htmlspecialchars( $post->content));?>
-         <br />
-         <em><a href="index.php?action=post&id=<?= urlencode($post->identifier) ?>">Commentaires</a></em>
+      <p><?= htmlspecialchars($post->chapo) ;?></p>
+      <p>Par : <?= htmlspecialchars($post->firstname); ?>   <?= htmlspecialchars($post->lastname) ;?></p>
+      <p> 
+         <em><a href="index.php?action=post&id=<?= urlencode($post->identifier) ?>">Voir la suite ...</a></em>
       </p>
    </div>
 <?php
 }
 ?>
 <?php $content = ob_get_clean(); ?>
-<!-- on appelle le template -->
+
 <?php require('layout.php') ?>

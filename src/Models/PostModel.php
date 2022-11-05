@@ -37,6 +37,10 @@ class Post
      * @var string
      */
     public string $identifier;
+
+    public string $firstname;
+
+    public string $lastname;
     
 }
 
@@ -49,8 +53,9 @@ class PostRepository
     public function getPost(string $identifier): Post 
     {
         $statement= $this->connection->getConnection()->prepare(
-            "SELECT post_id, title, content, chapo, DATE_FORMAT(creationDate, '%d%m%Y à %Hh%imin%ss') AS 
-            french_creation_date FROM posts WHERE post_id = ?");
+            "SELECT users.firstName,users.lastname,posts.post_id, posts.title, posts.content, posts.chapo, 
+            DATE_FORMAT(posts.creationDate, '%d%m%Y à %Hh%imin%ss') AS french_creation_date FROM posts 
+            INNER JOIN users ON users.user_id=posts.user_id WHERE posts.post_id = ?");
 
         $statement->execute([$identifier]);
 
@@ -61,6 +66,8 @@ class PostRepository
             $post->content = $row['content'];
             $post->identifier = $row['post_id'];
             $post->chapo = $row['chapo'];
+            $post->firstname = $row['firstName'];
+            $post->lastname = $row['lastname'];
             
         return $post;
     }
@@ -69,17 +76,22 @@ class PostRepository
     public function getPosts(): array
     {
         $statement= $this->connection->getConnection()->query(
-        "SELECT post_id, title, content, chapo, DATE_FORMAT(creationDate, '%d%m%Y à %Hh%imin%ss') AS 
-        french_creation_date FROM posts ORDER BY creationDate");
+        "SELECT users.firstName, users.lastname,posts.post_id,posts.title, posts.chapo, 
+        DATE_FORMAT(posts.creationDate,'%d%m%Y à %Hh%imin%ss') AS french_creation_date 
+        FROM users INNER JOIN posts ON users.user_id=posts.user_id ORDER BY creationDate DESC;");
+
+
         $posts = [];
 
         while (($row = $statement->fetch())){
         $post = new Post();
             $post->title = $row['title'];
             $post->french_creation_date = $row['french_creation_date'];
-            $post->content = $row['content'];
+            // $post->content = $row['content'];
             $post->identifier = $row['post_id'];
             $post->chapo = $row['chapo'];
+            $post->firstname = $row['firstName'];
+            $post->lastname = $row['lastname'];
 
             $posts[] = $post;
         }
