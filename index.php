@@ -6,6 +6,7 @@ use App\Controllers\AddComment\AddComment;
 use App\controllers\UpdateComment\UpdateComment;
 use App\Controllers\Logon\Logon;
 use App\Controllers\Connexion\Connexion;
+use App\Controllers\Logout\Logout;
 
 // require 'vendor/autoload.php';
    require_once('src/Controllers/PostList.php');
@@ -15,6 +16,7 @@ use App\Controllers\Connexion\Connexion;
    require_once('src/Controllers/Homepage.php');
    require_once('src/Controllers/Logon.php');
    require_once('src/Controllers/connexion.php');
+   require_once('src/Controllers/Logout.php');
 
    //ce fichier est notre routeur
    //il va donc nous rediriger vers le bon controleur
@@ -61,7 +63,11 @@ use App\Controllers\Connexion\Connexion;
 
          }elseif($_GET['action'] === 'connexion'){
             (new Connexion())->execute();
-         }else{
+         }elseif($_GET['action'] === 'logout'){
+            (new Logout())->execute();
+         }
+         
+         else{
 
             throw new Exception("la page que vous cherchez n'existe pas.");
 

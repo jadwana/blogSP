@@ -15,6 +15,11 @@ class Logon
 {
     public function execute(){
 
+        if(isset($_SESSION['user_id'])){
+            header("location: index.php");
+            exit;
+        }
+
         if(!empty($_POST)){
             $pseudo =null;
             $password = null;
@@ -29,11 +34,17 @@ class Logon
                 if(!$connectedUser){
                     throw new \Exception('mauvais pseudo  !');
                 }else{
-                    $userpass =$connectedUser->password;
-                    if($password != $userpass){
+                    // $userpass =$connectedUser->password;
+                    if($password != $connectedUser->password){
                         echo 'mauvais mot de passe';
                     }else{
                         echo 'vous etes connecté';
+                        
+                        $_SESSION['user_id']= $connectedUser->user_id;
+                        $_SESSION['pseudo']= $connectedUser->pseudo;
+                        $_SESSION['role'] = $connectedUser->role;
+
+                        header("location: index.php?action=homepage");
                     }
                 }
             }else{
