@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\User;
+namespace App\Models;
 
-use App\lib\Database\DatabaseConnection;
-require_once('src/lib/Database.php');
-
+use App\lib\DatabaseConnection;
+// require_once('src/lib/Database.php');
+require 'vendor/autoload.php';
 class User 
 {
     public string $role;
@@ -21,10 +21,11 @@ class User
 
     public string $email;
 
-}
+// }
 
-class UserRepository
-{
+// class UserRepository
+// {
+    public DatabaseConnection $connection;
     //check user logon
     public function checkUserLogon(string $pseudo): ?user
     {

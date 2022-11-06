@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Controllers\OnePost;
+namespace App\Controllers;
 
-use App\Models\Comment\CommentRepository;
-use App\Models\Post\PostRepository;
-use App\lib\Database\DatabaseConnection;
-// require '../vendor/autoload.php';
-require_once('src/Models/PostModel.php');
-require_once('src/Models/CommentModel.php');
-require_once('src/lib/Database.php');
+use App\Models\Comment;
+use App\Models\Post;
+use App\lib\DatabaseConnection;
+require 'vendor/autoload.php';
+
 
 class OnePost
 {
@@ -17,8 +15,8 @@ public function execute(string $identifier)
 {
     $connection = new DatabaseConnection();
 
-    $postRepository = new PostRepository();
-    $commentRepository = new CommentRepository();
+    $postRepository = new Post();
+    $commentRepository = new Comment();
     $postRepository->connection = $connection;
     $commentRepository->connection = $connection;
     $post = $postRepository->getPost($identifier);

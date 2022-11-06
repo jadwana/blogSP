@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Models\Comment;
+namespace App\Models;
 
-use App\lib\database\DatabaseConnection;
-// require '../vendor/autoload.php';
-require_once('src/lib/database.php');
-
+use App\lib\DatabaseConnection;
+require 'vendor/autoload.php';
 
 class Comment
 {
@@ -14,10 +12,7 @@ class Comment
     public string $comment;
     public string $identifier;
     public string $post;
-}
 
-class CommentRepository
-{
     public DatabaseConnection $connection;
 
      //on recupère les commentaires associés à l'id du post

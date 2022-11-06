@@ -1,11 +1,10 @@
 <?php
-namespace App\Controllers\AddUser;
+namespace App\Controllers;
 
 use App\Models\user;
 use App\lib\Database\DatabaseConnection;
-// require '../vendor/autoload.php';
-require_once('src/Models/UserModel.php');
-require_once('src/lib/Database.php');
+require 'vendor/autoload.php';
+
 
 class AddUser
 {

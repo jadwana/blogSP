@@ -1,11 +1,10 @@
 <?php
-namespace App\Controllers\UpdateComment;
+namespace App\Controllers;
 
-use App\Models\Comment\CommentRepository;
-use App\lib\database\DatabaseConnection;
-// require '../vendor/autoload.php';
-require_once('src/Models/CommentModel.php');
-require_once('src/lib/Database.php');
+use App\Models\Comment;
+use App\lib\DatabaseConnection;
+require 'vendor/autoload.php';
+
 
 
 class UpdateComment
@@ -25,13 +24,13 @@ class UpdateComment
                 throw new \Exception('les données du formulaire sont invalides');
             }
 
-            $commentRepository = new CommentRepository();
+            $commentRepository = new Comment();
             $commentRepository->connection = new DatabaseConnection();
             $success = $commentRepository->updateComment($identifier, $comment);
             if(!$success){
                 throw new \Exception('Impossible de modifier le commentaire !');
             }else{
-                $commentRepository = new CommentRepository();
+                $commentRepository = new Comment();
                 $commentRepository->connection = new DatabaseConnection();
                 $comment = $commentRepository->getComment($identifier);
                 header('location: index.php?action=post&id='. $comment->post);
@@ -40,7 +39,7 @@ class UpdateComment
 
         }
         //affiche le formulaire s'il n'y a pas d'entée et au début
-        $commentRepository = new CommentRepository();
+        $commentRepository = new Comment();
         $commentRepository->connection = new DatabaseConnection();
         $comment = $commentRepository->getComment($identifier);
         

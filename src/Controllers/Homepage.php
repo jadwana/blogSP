@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers\Homepage;
+namespace App\Controllers;
 
 class Homepage
 {

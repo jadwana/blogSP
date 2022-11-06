@@ -1,22 +1,23 @@
 <?php
-use App\Controllers\OnePost\OnePost;
-use App\Controllers\Homepage\Homepage;
-use App\Controllers\PostList\PostList;
-use App\Controllers\AddComment\AddComment;
-use App\controllers\UpdateComment\UpdateComment;
-use App\Controllers\Logon\Logon;
-use App\Controllers\Connexion\Connexion;
-use App\Controllers\Logout\Logout;
+session_start();
+use App\Controllers\OnePost;
+use App\Controllers\Homepage;
+use App\Controllers\PostList;
+use App\Controllers\AddComment;
+use App\controllers\UpdateComment;
+use App\Controllers\Logon;
+use App\Controllers\Connexion;
+use App\Controllers\Logout;
 
-// require 'vendor/autoload.php';
-   require_once('src/Controllers/PostList.php');
-   require_once('src/Controllers/OnePost.php');
-   require_once('src/Controllers/AddComment.php');
-   require_once('src/Controllers/UpdateComment.php');
-   require_once('src/Controllers/Homepage.php');
-   require_once('src/Controllers/Logon.php');
-   require_once('src/Controllers/connexion.php');
-   require_once('src/Controllers/Logout.php');
+require 'vendor/autoload.php';
+   // require_once('src/Controllers/PostList.php');
+   // require_once('src/Controllers/OnePost.php');
+   // require_once('src/Controllers/AddComment.php');
+   // require_once('src/Controllers/UpdateComment.php');
+   // require_once('src/Controllers/Homepage.php');
+   // require_once('src/Controllers/Logon.php');
+   // require_once('src/Controllers/connexion.php');
+   // require_once('src/Controllers/Logout.php');
 
    //ce fichier est notre routeur
    //il va donc nous rediriger vers le bon controleur
@@ -62,6 +63,10 @@ use App\Controllers\Logout\Logout;
             (new Logon())->execute();
 
          }elseif($_GET['action'] === 'connexion'){
+            if(isset($_SESSION['user_id'])){
+               header("location: index.php");
+               exit;
+            }
             (new Connexion())->execute();
          }elseif($_GET['action'] === 'logout'){
             (new Logout())->execute();

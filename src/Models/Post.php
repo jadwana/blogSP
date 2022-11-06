@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Models\Post;
+namespace App\Models;
 
-use App\lib\Database\DatabaseConnection;
-require_once('src/lib/Database.php');
-// require '../vendor/autoload.php';
+use App\lib\DatabaseConnection;
+require 'vendor/autoload.php';
 class Post
 {
     /**
@@ -42,10 +41,7 @@ class Post
 
     public string $lastname;
     
-}
 
-class PostRepository
-{
     //connect to the database
     public DatabaseConnection $connection;
 

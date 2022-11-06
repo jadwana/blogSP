@@ -1,11 +1,10 @@
 <?php
-namespace App\Controllers\AddComment;
+namespace App\Controllers;
 
-use App\Models\Comment\CommentRepository;
-use App\lib\Database\DatabaseConnection;
-// require '../vendor/autoload.php';
-require_once('src/Models/CommentModel.php');
-require_once('src/lib/Database.php');
+use App\Models\Comment;
+use App\lib\DatabaseConnection;
+require 'vendor/autoload.php';
+
 
 class AddComment
 {
@@ -23,7 +22,7 @@ class AddComment
             throw new \Exception('les données du formulaire sont invalides');
         }
         //on crée le nouveau commentaire
-        $commentRepository = new CommentRepository();
+        $commentRepository = new Comment();
         $commentRepository->connection = new DatabaseConnection();
         $success = $commentRepository->createComment($post, $author, $comment);
         if(!$success){

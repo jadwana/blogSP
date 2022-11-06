@@ -1,5 +1,5 @@
 <?php
-namespace App\lib\Database;
+namespace App\lib;
 
 class DatabaseConnection
 {
