@@ -37,7 +37,7 @@ require 'vendor/autoload.php';
             if(isset($_GET['id']) && $_GET['id'] > 0){
                $identifier = $_GET['id'];
    
-               (new addComment())->execute($identifier, $_POST);
+               (new addComment())->execute($identifier);
             }else{
                throw new Exception('aucun identifiant envoyé') ;
             }

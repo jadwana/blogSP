@@ -22,14 +22,18 @@
    <?php require ('forms/addCommentForm.php') ?>
 
     
-
+    <br>
     <?php
     foreach ($comments as $comment){
     ?>
         <p>
             <strong><?= htmlspecialchars($comment->pseudo) ?></strong> le <?= $comment->frenchCreationDate ?> 
-            <a href="index.php?action=updateComment&id=<?= $comment->identifier ?>">modifier</a> 
-        </p>
+            <?php
+                if(isset($_SESSION['pseudo']) && $comment->pseudo == $_SESSION['pseudo']){
+                 echo '<a href="index.php?action=updateComment&id='.$comment->identifier.'">modifier</a>';
+               }
+            ?>
+        </p>  
         <p>
             <?= nl2br(htmlspecialchars($comment->comment)) ?>
         </p>

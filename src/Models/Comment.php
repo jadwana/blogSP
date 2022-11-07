@@ -21,7 +21,8 @@ class Comment
     
         $statement= $this->connection->getConnection()->prepare(
             "SELECT comments.comment_id, comments.comment, DATE_FORMAT(comments.commentDate, '%d%m%Y à %Hh%imin%ss') AS 
-        french_creation_date, comments.post_id, users.pseudo FROM comments INNER JOIN users ON comments.user_id = users.user_id WHERE post_id = ? AND comments.validation = 'y' ORDER BY comments.commentDate DESC");
+        french_creation_date, comments.post_id, users.pseudo FROM comments INNER JOIN users ON comments.user_id = users.user_id 
+        WHERE post_id = ? AND comments.validation = 'y' ORDER BY comments.commentDate DESC");
 
         $statement->execute([$post]);
 

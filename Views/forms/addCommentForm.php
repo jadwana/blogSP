@@ -1,14 +1,13 @@
 <form action="index.php?action=addComment&id=<?= $post->identifier; ?>" method="post">
     <div>
-        <label for="content">Mon commenaire :</label> <br>
-        <textarea name="content" id="" cols="30" rows="10"></textarea>
+        <label for="comment">Mon commenaire :</label> <br>
+        <textarea name="comment" id="" cols="30" rows="10"></textarea>
     </div>
     <div>
-        <label for="author">id utilisateur :</label> <br>
-        <input type="text" name="author" id="author"> 
+        <p>auteur : <?= $_SESSION['pseudo']?></p>
     </div><br>
     <div>
-        <input type="submit" value="ajouter">
+        <input type="submit" value="ajouter un commentaire">
     </div>
 
 </form>

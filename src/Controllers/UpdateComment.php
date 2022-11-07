@@ -14,11 +14,11 @@ class UpdateComment
         
         //gestion de la soumission s'il y a une entrée
         if($input !== null){
-            $author =null;
+            
             $comment = null;
 
-            if(!empty($input['pseudo']) && !empty($input['comment'])){
-                $author = htmlspecialchars($input['pseudo']);
+            if( !empty($input['comment'])){
+                
                 $comment = htmlspecialchars($input['comment']) ;
             }else {
                 throw new \Exception('les données du formulaire sont invalides');
