@@ -1,8 +1,9 @@
-<?php $title="connexion";?>
+<?php $title="ajout article";?>
 
 
 <?php ob_start(); ?>
 <p><a href="index.php">retour accueil</a></p>
+
 <p>connectez-vous :</p> <br>
 
 <?php require ('forms/logonUserForm.php') ?>

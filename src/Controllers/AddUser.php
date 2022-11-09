@@ -57,14 +57,14 @@ class AddUser
             else{
                 echo 'toutes les informations doivent être complétées';
             }
-        }else{
-            header('location: index.php?action=register');
+        // }else{
+        //     header('location: index.php?action=addUser');
         }
 
 
 
 
-
+        require ('views/registerPage.php'); 
         
     }
 }

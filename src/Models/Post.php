@@ -94,6 +94,18 @@ class Post
         return $posts;
     }
 
+    public function addPost(string $title,  string $content, string $chapo, string $user_id)
+    {
+       
+            $statement = $this->connection->getConnection()->prepare(
+                'INSERT INTO posts( title, content, chapo, user_id, creationDate) VALUES(?, ?, ?, ?, NOW())'
+            );
+            $affectedLines = $statement->execute([$title, $content, $chapo, $user_id]);
+    
+            return($affectedLines > 0);
+        
+    }
+
     
 
 }

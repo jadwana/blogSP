@@ -7,7 +7,7 @@
 
 <?php require ('forms/registerUserForm.php') ?><br>
 <p>déjà un compte?</p>
-<p><a href="index.php?action=connexion">connection</a></p>
+<p><a href="index.php?action=logon">connection</a></p>
 
 <?php $content = ob_get_clean(); ?>
 

@@ -12,15 +12,11 @@ require 'vendor/autoload.php';
 class Logon
 
 {
-    public function execute(){
-
-     
-
-        
-
+    public function execute()
+    {
         if(!empty($_POST)){
             $pseudo =null;
-            $password = null;
+            // $password = null;
 
             if(isset($_POST['pseudo'], $_POST['password']) && !empty($_POST['pseudo']) && !empty($_POST['password'])){
                 $pseudo=htmlspecialchars($_POST['pseudo']);
@@ -35,6 +31,8 @@ class Logon
                         $_SESSION['user_id']= $connectedUser->user_id;
                         $_SESSION['pseudo']= $connectedUser->pseudo;
                         $_SESSION['role'] = $connectedUser->role;
+                        $_SESSION['firstname'] = $connectedUser->firstname;
+                        $_SESSION['lastname'] = $connectedUser->lastname;
 
                         header("location: index.php");
                     }else{
@@ -48,7 +46,7 @@ class Logon
         }else{
             // header('location: index.php?action=logon');
         }
-        
+        require ('views/connexionPage.php');  
     }
 }
 

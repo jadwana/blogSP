@@ -2,14 +2,13 @@
 session_start();
 use App\Controllers\Logon;
 use App\Controllers\Logout;
+use App\Controllers\AddPost;
 use App\Controllers\AddUser;
 use App\Controllers\OnePost;
-use App\Controllers\Homepage;
 use App\Controllers\PostList;
-use App\Controllers\Register;
-use App\Controllers\Connexion;
 use App\Controllers\AddComment;
 use App\controllers\UpdateComment;
+use App\Controllers\Administration;
 
 require 'vendor/autoload.php';
 
@@ -54,22 +53,33 @@ require 'vendor/autoload.php';
             (new PostList())->execute();
 
          }elseif($_GET['action'] === 'logon'){
-            (new Logon())->execute();
-
-         }elseif($_GET['action'] === 'connexion'){
             if(isset($_SESSION['user_id'])){
                header("location: index.php");
                exit;
             }
-            (new Connexion())->execute();
+            (new Logon())->execute();
+
          }elseif($_GET['action'] === 'logout'){
             (new Logout())->execute();
 
-         }elseif($_GET['action'] === 'register'){
-            (new Register())->execute();
+         
 
          }elseif($_GET['action'] === 'addUser'){
+            if(isset($_SESSION['user_id'])){
+               header("location: index.php");
+               exit;
+            }
             (new AddUser())->execute();
+
+         }elseif($_GET['action'] === 'admin'){
+            if(isset($_SESSION['user_id']) && $_SESSION['role']=='admin'){
+               (new Administration())->execute();
+            }else{
+               throw new Exception('seul l\'administrateur à accès à cette page') ;
+            }
+            
+         }elseif($_GET['action'] === 'addPost'){
+            (new AddPost())->execute();
          }
          
          else{
@@ -81,7 +91,7 @@ require 'vendor/autoload.php';
          
         
       }else{
-         (new Homepage())->execute();
+         require('Views/homepage.php');
       }
    
    }catch (Exception $e) {

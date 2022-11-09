@@ -1,4 +1,4 @@
-<form action="#">
+<form action="index.php?action=addPost" method="post">
     <div>
         <label for="title">Titre :</label>
         <input type="text" name="title" id="title">   
@@ -11,10 +11,7 @@
         <label for="content">contenu</label>
         <textarea name="content" id="" cols="30" rows="10"></textarea>
     </div>
-    <div>
-        <label for="author">auteur :</label>
-        <input type="text" name="author" id="author">   
-    </div>
+    
     <div>
         <input type="submit" value="ajouter">
     </div>

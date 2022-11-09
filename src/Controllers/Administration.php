@@ -1,12 +1,11 @@
 <?php
 namespace App\Controllers;
 
-class Homepage
+class Administration
 {
     public function execute ()
     {
-        require ('views/homepage.php'); 
+        require ('views/administration.php'); 
 
     }
 }
-
