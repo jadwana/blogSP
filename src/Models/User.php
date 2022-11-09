@@ -26,8 +26,8 @@ class User
 // class UserRepository
 // {
     public DatabaseConnection $connection;
-    //check user logon
-    public function checkUserLogon(string $pseudo): ?user
+    //check user pseudo
+    public function checkUserPseudo(string $pseudo): ?user
     {
         $statement= $this->connection->getConnection()->prepare(
             'SELECT * FROM users WHERE pseudo=? ');
@@ -50,9 +50,33 @@ class User
         return $user;
     }
 
+    //check user email
+    public function checkUserEmail(string $email)
+    {
+        $statement= $this->connection->getConnection()->prepare(
+            'SELECT * FROM users WHERE email=? ');
+
+            $statement->execute([$email]);
+
+        $row = $statement->fetch();
+        if ($row === false) {
+            return null;
+        }
+        // $user = new User();
+        //     $user->pseudo = $row['pseudo'];
+        //     $user->password = $row['password'];
+        //     $user->user_id = $row['user_id'];
+        //     $user->role = $row['role'];
+        //     $user->email = $row['email'];
+        //     $user->firstname = $row['firstName'];
+        //     $user->lastname = $row['lastname'];
+            
+        return $row;
+    }
+
     //creation nvel utilisateur
 
-    public function createUser(string $firstname, string $lastname, string $pseudo, string $password, string $email): bool
+    public function addUser(string $firstname, string $lastname, string $pseudo, string $password, string $email): bool
     {
         $statement = $this->connection->getConnection()->prepare(
             'INSERT INTO users( firstname, lastname, pseudo, password, email) VALUES(?, ?, ?, ?, ?)'

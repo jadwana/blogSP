@@ -24,25 +24,21 @@ class Logon
 
             if(isset($_POST['pseudo'], $_POST['password']) && !empty($_POST['pseudo']) && !empty($_POST['password'])){
                 $pseudo=htmlspecialchars($_POST['pseudo']);
-                $password=htmlspecialchars($_POST['password']);
 
                 $userRepository = new User();
                 $userRepository->connection= new DatabaseConnection();
-                $connectedUser = $userRepository->checkUserLogon($pseudo);
+                $connectedUser = $userRepository->checkUserPseudo($pseudo);
                 if(!$connectedUser){
                     throw new \Exception('mauvais pseudo  !');
                 }else{
-                    // $userpass =$connectedUser->password;
-                    if($password != $connectedUser->password){
-                        echo 'mauvais mot de passe';
-                    }else{
-                        
-                        
+                    if(password_verify($_POST['password'], $connectedUser->password)){
                         $_SESSION['user_id']= $connectedUser->user_id;
                         $_SESSION['pseudo']= $connectedUser->pseudo;
                         $_SESSION['role'] = $connectedUser->role;
 
                         header("location: index.php");
+                    }else{
+                        echo 'mauvais mot de passe'; exit;
                     }
                 }
             }else{

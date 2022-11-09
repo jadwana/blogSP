@@ -1,4 +1,4 @@
-<form action="#">
+<form action="index.php?action=addUser" method="post">
     <div>
         <label for="firstname">Votre prénom</label>
         <input type="text" name="firstname" id="firstname">   

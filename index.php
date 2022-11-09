@@ -1,23 +1,17 @@
 <?php
 session_start();
+use App\Controllers\Logon;
+use App\Controllers\Logout;
+use App\Controllers\AddUser;
 use App\Controllers\OnePost;
 use App\Controllers\Homepage;
 use App\Controllers\PostList;
+use App\Controllers\Register;
+use App\Controllers\Connexion;
 use App\Controllers\AddComment;
 use App\controllers\UpdateComment;
-use App\Controllers\Logon;
-use App\Controllers\Connexion;
-use App\Controllers\Logout;
 
 require 'vendor/autoload.php';
-   // require_once('src/Controllers/PostList.php');
-   // require_once('src/Controllers/OnePost.php');
-   // require_once('src/Controllers/AddComment.php');
-   // require_once('src/Controllers/UpdateComment.php');
-   // require_once('src/Controllers/Homepage.php');
-   // require_once('src/Controllers/Logon.php');
-   // require_once('src/Controllers/connexion.php');
-   // require_once('src/Controllers/Logout.php');
 
    //ce fichier est notre routeur
    //il va donc nous rediriger vers le bon controleur
@@ -70,6 +64,12 @@ require 'vendor/autoload.php';
             (new Connexion())->execute();
          }elseif($_GET['action'] === 'logout'){
             (new Logout())->execute();
+
+         }elseif($_GET['action'] === 'register'){
+            (new Register())->execute();
+
+         }elseif($_GET['action'] === 'addUser'){
+            (new AddUser())->execute();
          }
          
          else{

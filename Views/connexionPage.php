@@ -7,7 +7,7 @@
 
 <?php require ('forms/logonUserForm.php') ?>
 <p>pas encore de compte?</p>
-<p><a href="index.php?action=addUser">inscription</a></p>
+<p><a href="index.php?action=register">inscription</a></p>
 
 <?php $content = ob_get_clean(); ?>
 

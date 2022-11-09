@@ -8,6 +8,7 @@
 <p><a href="index.php?action=postlist">blog</a></p>
 <p><a href="index.php?action=connexion">connection</a></p>
 <p><a href="index.php?action=logout">déconnection</a></p>
+<p><a href="index.php?action=register">inscription</a></p>
 <h1>Mon super super blog !</h1>
 
 <?php 
