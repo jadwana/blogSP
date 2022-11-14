@@ -8,6 +8,7 @@ require 'vendor/autoload.php';
 
 class AddUser
 {
+    //on fait les vérifications et on securise les entrées
     public function execute()
     {
         if(!empty($_POST)){

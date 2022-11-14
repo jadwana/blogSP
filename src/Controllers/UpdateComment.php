@@ -32,8 +32,8 @@ class UpdateComment
             }else{
                 $commentRepository = new Comment();
                 $commentRepository->connection = new DatabaseConnection();
-                $comment = $commentRepository->getComment($identifier);
-                header('location: index.php?action=post&id='. $comment->post);
+                $comment = $commentRepository->getOneComment($identifier);
+                header('location: index.php?action=post&id='.$comment->getPost);
                 
             }
 
@@ -41,7 +41,7 @@ class UpdateComment
         //affiche le formulaire s'il n'y a pas d'entée et au début
         $commentRepository = new Comment();
         $commentRepository->connection = new DatabaseConnection();
-        $comment = $commentRepository->getComment($identifier);
+        $comment = $commentRepository->getOneComment($identifier);
         
         if ($comment === null) {
             throw new \Exception("Le commentaire $identifier n'existe pas.");

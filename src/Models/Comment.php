@@ -7,11 +7,11 @@ require 'vendor/autoload.php';
 
 class Comment
 {
-    public string $pseudo;
-    public string $frenchCreationDate;
-    public string $comment;
-    public string $identifier;
-    public string $post;
+    private string $pseudo;
+    private string $frenchCreationDate;
+    private string $comment;
+    private string $identifier;
+    private string $post;
 
     public DatabaseConnection $connection;
 
@@ -29,11 +29,11 @@ class Comment
         $comments = [];
         while (($row = $statement->fetch())){
             $comment = new Comment();
-            $comment->pseudo = $row['pseudo'];
-            $comment->frenchCreationDate = $row['french_creation_date'];
-            $comment->comment = $row['comment'];
-            $comment->identifier = $row['comment_id'];
-            $comment->post =$row['post_id'];
+            $comment->getPseudo = $row['pseudo'];
+            $comment->getFrenchCreationDate = $row['french_creation_date'];
+            $comment->getComment = $row['comment'];
+            $comment->getIdentifier = $row['comment_id'];
+            $comment->getPost =$row['post_id'];
 
             $comments[] = $comment;
     }
@@ -41,7 +41,7 @@ class Comment
     return $comments;
     } 
     // on récupère un seul commentaire en fonction de son id
-    public function getComment(string $identifier): ?Comment
+    public function getOneComment(string $identifier): ?Comment
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT comments.comment_id, comments.comment, DATE_FORMAT(comments.commentDate, '%d%m%Y à %Hh%imin%ss') AS 
@@ -56,11 +56,11 @@ class Comment
         }
 
         $comment = new Comment();
-        $comment->identifier = $row['comment_id'];
-        $comment->author = $row['pseudo'];
-        $comment->frenchCreationDate = $row['french_creation_date'];
-        $comment->comment = $row['comment'];
-        $comment->post = $row['post_id'];
+        $comment->getIdentifier = $row['comment_id'];
+        $comment->getAuthor = $row['pseudo'];
+        $comment->getFrenchCreationDate = $row['french_creation_date'];
+        $comment->getComment = $row['comment'];
+        $comment->getPost = $row['post_id'];
 
         return $comment;
     }
@@ -88,4 +88,104 @@ class Comment
         return($affectedLines > 0);
     }
 
+
+    /**
+     * Get the value of pseudo
+     */ 
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
+
+    /**
+     * Set the value of pseudo
+     *
+     * @return  self
+     */ 
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of frenchCreationDate
+     */ 
+    public function getFrenchCreationDate()
+    {
+        return $this->frenchCreationDate;
+    }
+
+    /**
+     * Set the value of frenchCreationDate
+     *
+     * @return  self
+     */ 
+    public function setFrenchCreationDate($frenchCreationDate)
+    {
+        $this->frenchCreationDate = $frenchCreationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of comment
+     */ 
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set the value of comment
+     *
+     * @return  self
+     */ 
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of identifier
+     */ 
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * Set the value of identifier
+     *
+     * @return  self
+     */ 
+    public function setIdentifier($identifier)
+    {
+        $this->identifier = $identifier;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of post
+     */ 
+    public function getPost()
+    {
+        return $this->post;
+    }
+
+    /**
+     * Set the value of post
+     *
+     * @return  self
+     */ 
+    public function setPost($post)
+    {
+        $this->post = $post;
+
+        return $this;
+    }
 }

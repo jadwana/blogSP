@@ -11,13 +11,13 @@ foreach ($posts as $post){
 ?>
    <div class="news">
       <h3>
-         <?= htmlspecialchars($post->title); ?>
-         <em>le <?= $post->french_creation_date; ?></em>
+         <?= $post->getTitle; ?>
+         <em>le <?= $post->getFrench_creation_date; ?></em>
       </h3>
-      <p><?= htmlspecialchars($post->chapo) ;?></p>
-      <p>Par : <?= htmlspecialchars($post->firstname); ?>   <?= htmlspecialchars($post->lastname) ;?></p>
+      <p><?= htmlspecialchars($post->getChapo) ;?></p>
+      <p>Par : <?= htmlspecialchars($post->getFirstname); ?>   <?= htmlspecialchars($post->getLastname) ;?></p>
       <p> 
-         <em><a href="index.php?action=post&id=<?= urlencode($post->identifier) ?>">Voir la suite ...</a></em>
+         <em><a href="index.php?action=post&id=<?= urlencode($post->getIdentifier) ?>">Voir la suite ...</a></em>
       </p>
    </div>
 <?php
