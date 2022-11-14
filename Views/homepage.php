@@ -23,7 +23,7 @@
 Bienvenue <?= $userpseudo?>
 </p>
 <p class="bg-primary">introduction du blog</p>
-<p>paragraphe d'introduction</p>
+<p>paragraphe d'introduction ajout de texte pour test</p>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('layout.php') ?>
