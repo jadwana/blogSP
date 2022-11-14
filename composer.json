@@ -12,5 +12,7 @@
             "email": "jadwana@yahoo.fr"
         }
     ],
-    "require": {}
+    "require": {
+        "twig/twig": "^3.4"
+    }
 }

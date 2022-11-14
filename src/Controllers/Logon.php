@@ -27,12 +27,12 @@ class Logon
                 if(!$connectedUser){
                     throw new \Exception('mauvais pseudo  !');
                 }else{
-                    if(password_verify($_POST['password'], $connectedUser->password)){
-                        $_SESSION['user_id']= $connectedUser->user_id;
-                        $_SESSION['pseudo']= $connectedUser->pseudo;
-                        $_SESSION['role'] = $connectedUser->role;
-                        $_SESSION['firstname'] = $connectedUser->firstname;
-                        $_SESSION['lastname'] = $connectedUser->lastname;
+                    if(password_verify($_POST['password'], $connectedUser->getPassword)){
+                        $_SESSION['user_id']= $connectedUser->getUser_id;
+                        $_SESSION['pseudo']= $connectedUser->getPseudo;
+                        $_SESSION['role'] = $connectedUser->getRole;
+                        $_SESSION['firstname'] = $connectedUser->getFirstname;
+                        $_SESSION['lastname'] = $connectedUser->getLastname;
 
                         header("location: index.php");
                     }else{

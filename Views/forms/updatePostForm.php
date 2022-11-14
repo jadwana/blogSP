@@ -11,10 +11,7 @@
         <label for="content">contenu</label>
         <textarea name="content" id="" cols="30" rows="10"></textarea>
     </div>
-    <div>
-        <label for="author">auteur :</label>
-        <input type="text" name="author" id="author">   
-    </div>
+    
     
 
 </form>

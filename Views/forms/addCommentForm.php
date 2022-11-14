@@ -1,6 +1,6 @@
-<form action="index.php?action=addComment&id=<?= $post->identifier; ?>" method="post">
+<form action="index.php?action=addComment&id=<?= $post->getIdentifier; ?>" method="post">
     <div>
-        <label for="comment">Mon commenaire :</label> <br>
+        <label for="comment">Mon commentaire :</label> <br>
         <textarea name="comment" id="" cols="30" rows="10"></textarea>
     </div>
     <div>

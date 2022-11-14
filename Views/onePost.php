@@ -6,14 +6,14 @@
 
     <div>
         <h3>
-            <?= htmlspecialchars($post->title) ?>
-            <em>le <?= $post->french_creation_date ?></em>
+            <?= htmlspecialchars($post->getTitle) ?>
+            <em>le <?= $post->getFrench_creation_date ?></em>
         </h3>
-        <p>chapo : <?= htmlspecialchars($post->chapo)?></p>
+        <p>chapo : <?= htmlspecialchars($post->getChapo)?></p>
         <p>
-            <?= nl2br(htmlspecialchars($post->content)) ?>
+            <?= nl2br(htmlspecialchars($post->getContent)) ?>
         </p>
-        <p>Par :  <?= htmlspecialchars($post->firstname) ?>    <?= htmlspecialchars($post->lastname) ?></p>
+        <p>Par :  <?= htmlspecialchars($post->getFirstname) ?>    <?= htmlspecialchars($post->getLastname) ?></p>
     </div>
 
     <h2>commentaires</h2>
@@ -27,15 +27,15 @@
     foreach ($comments as $comment){
     ?>
         <p>
-            <strong><?= htmlspecialchars($comment->pseudo) ?></strong> le <?= $comment->frenchCreationDate ?> 
+            <strong><?= htmlspecialchars($comment->getPseudo) ?></strong> le <?= $comment->getFrenchCreationDate ?> 
             <?php
-                if(isset($_SESSION['pseudo']) && $comment->pseudo == $_SESSION['pseudo']){
-                 echo '<a href="index.php?action=updateComment&id='.$comment->identifier.'">modifier</a>';
+                if(isset($_SESSION['pseudo']) && $comment->getPseudo == $_SESSION['pseudo']){
+                 echo '<a href="index.php?action=updateComment&id='.$comment->getIdentifier.'">modifier</a>';
                }
             ?>
         </p>  
         <p>
-            <?= nl2br(htmlspecialchars($comment->comment)) ?>
+            <?= nl2br(htmlspecialchars($comment->getComment)) ?>
         </p>
     <?php
     }
